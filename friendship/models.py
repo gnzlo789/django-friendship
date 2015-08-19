@@ -152,8 +152,8 @@ class FriendshipManager(models.Manager):
     def friends(self, user):
         """ Return a list of all friends """
         key = cache_key('friends', user.pk)
-        friends = cache.get(key)
-
+        # friends = cache.get(key)
+        friends = None
         if friends is None:
             qs = Friend.objects.select_related('from_user', 'to_user').filter(to_user=user).all()
             friends = [u.from_user for u in qs]
@@ -163,7 +163,7 @@ class FriendshipManager(models.Manager):
 
     def requests(self, user):
         """ Return a list of friendship requests """
-        # key = cache_key('requests', user.pk)
+        key = cache_key('requests', user.pk)
         # requests = cache.get(key)
         requests = None
         if requests is None:
@@ -176,7 +176,7 @@ class FriendshipManager(models.Manager):
 
     def sent_requests(self, user):
         """ Return a list of friendship requests from user """
-        # key = cache_key('sent_requests', user.pk)
+        key = cache_key('sent_requests', user.pk)
         # requests = cache.get(key)
         requests = None
         if requests is None:
@@ -189,7 +189,7 @@ class FriendshipManager(models.Manager):
 
     def unread_requests(self, user):
         """ Return a list of unread friendship requests """
-        # key = cache_key('unread_requests', user.pk)
+        key = cache_key('unread_requests', user.pk)
         # unread_requests = cache.get(key)
         unread_requests = None
         if unread_requests is None:
@@ -203,7 +203,7 @@ class FriendshipManager(models.Manager):
 
     def unread_request_count(self, user):
         """ Return a count of unread friendship requests """
-        # key = cache_key('unread_request_count', user.pk)
+        key = cache_key('unread_request_count', user.pk)
         # count = cache.get(key)
         count = None
         if count is None:
@@ -216,7 +216,7 @@ class FriendshipManager(models.Manager):
 
     def read_requests(self, user):
         """ Return a list of read friendship requests """
-        # key = cache_key('read_requests', user.pk)
+        key = cache_key('read_requests', user.pk)
         # read_requests = cache.get(key)
         read_requests = None
         if read_requests is None:
@@ -230,7 +230,7 @@ class FriendshipManager(models.Manager):
 
     def rejected_requests(self, user):
         """ Return a list of rejected friendship requests """
-        # key = cache_key('rejected_requests', user.pk)
+        key = cache_key('rejected_requests', user.pk)
         # rejected_requests = cache.get(key)
         
         rejected_requests = None
@@ -245,7 +245,7 @@ class FriendshipManager(models.Manager):
 
     def unrejected_requests(self, user):
         """ All requests that haven't been rejected """
-        # key = cache_key('unrejected_requests', user.pk)
+        key = cache_key('unrejected_requests', user.pk)
         # unrejected_requests = cache.get(key)
         unrejected_requests = None
         
@@ -260,7 +260,7 @@ class FriendshipManager(models.Manager):
 
     def unrejected_request_count(self, user):
         """ Return a count of unrejected friendship requests """
-        # key = cache_key('unrejected_request_count', user.pk)
+        key = cache_key('unrejected_request_count', user.pk)
         # count = cache.get(key)
         count = None
         if count is None:
